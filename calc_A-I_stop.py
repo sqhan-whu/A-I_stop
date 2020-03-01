@@ -1,6 +1,6 @@
 # Date: 20200301
 # author: Han Shaoqing
-# usages: analysis for weiqi A-I stop site( Ni Nt)
+# usages: analysis for weiqi A-I stop site( Ni Nt, N-1i N-1t, N+1i N+1t)
 #####################################################################
 
 from os.path import basename
