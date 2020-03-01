@@ -49,15 +49,25 @@ def get_RT_dic(samf):
 
 forward_reads, freads_num, rreads_num, totalreads_num, f_pos_coverage, r_pos_coverage = get_RT_dic(argv[1])
 
-print("dirction\tchrID\tposition\tNi\tNt")
+print("dirction\tchrID\tposition\tNi\tNt\t(N-1)i\t(N-1)t\t(N+1)i\t(N+1)t")
 
 for k,v in forward_reads.items():
 	dirction, chrID, pos = k.split('\t')
 	if dirction == '+':
+		NP = forward_reads.get((dirction+"\t"+chrID+"\t"+str(int(pos)-1)),0)
+		NT = f_pos_coverage.get((dirction+"\t"+chrID+"\t"+str(int(pos)-1)),0)
+		PN = forward_reads.get((dirction+"\t"+chrID+"\t"+str(int(pos)+1)),0)
+		TN = f_pos_coverage.get((dirction+"\t"+chrID+"\t"+str(int(pos)+1)),0)
 		cov = f_pos_coverage[k]
-		print(str(k)+"\t"+str(v)+"\t"+str(cov))
+		print(str(k)+"\t"+str(v)+"\t"+str(cov)+"\t"+str(NP)+"\t"+str(NT)+"\t"+str(PN)+"\t"+str(TN))
 	else:
+		NP = forward_reads.get((dirction+"\t"+chrID+"\t"+str(int(pos)-1)),0)
+		NT = r_pos_coverage.get((dirction+"\t"+chrID+"\t"+str(int(pos)-1)),0)
+		PN = forward_reads.get((dirction+"\t"+chrID+"\t"+str(int(pos)+1)),0)
+		TN = r_pos_coverage.get((dirction+"\t"+chrID+"\t"+str(int(pos)+1)),0)
+
 		cov = r_pos_coverage[k]
-		print(str(k)+"\t"+str(v)+"\t"+str(cov))
+		print(str(k)+"\t"+str(v)+"\t"+str(cov)+"\t"+str(NP)+"\t"+str(NT)+"\t"+str(PN)+"\t"+str(TN))
 #if __name__ == '__main__':
 #	main()
+
