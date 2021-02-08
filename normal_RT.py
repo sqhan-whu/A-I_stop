@@ -85,6 +85,5 @@ for i in row:
 	new_row = ''
 	i = i.split('\t')
 	new_row = str(i[0])+'\t'+str(i[1])+'\t'+str(i[2])+'\t'+str(i[3])+'\t'+str(i[4])
-#print(new_row)
+print(new_row)
 print(r, p)
-print(factor1,factor2)
