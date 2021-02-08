@@ -23,7 +23,6 @@ def cal_RT_value(mutations, factor):
 				mutation = int(line[5])
 
 				RT_value = math.log(mutation+1,2) / factor
-#				RT_value =  mutation/ factor
 
 				k = str(chrID)+'\t'+str(position)
 				content = str(chrID)+'\t'+str(position)+'\t'+ str(ref_base)+'\t'+ str(alt_base)+ '\t'+ str(coverage) + '\t' + str(RT_value)
