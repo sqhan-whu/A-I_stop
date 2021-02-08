@@ -6,13 +6,7 @@ import HTSeq
 from collections import defaultdict
 
 ###  Setup all cut-off
-# Fisher cut-off
-PVALUE_CUTOFF = 0.001
-# MACS2 cut-off
-QVALUE_CUTOFF = 2
-# POI cut-off
-POM_CUTOFF = 4
-POI_CUTOFF = 2
+
 # RPMF cut-off
 RPMF_CUTOFF = 4
 # window occurence
