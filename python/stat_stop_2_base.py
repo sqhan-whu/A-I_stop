@@ -1,5 +1,5 @@
 ## usage: python stat_stop_2_base.py 1.rough.txt 1neg.rough.txt 
-## get stop read position -2 base (qual > 26 )
+## get stop read position -2 base (qual > 26)
 
 
 import sys
