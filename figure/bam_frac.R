@@ -3,10 +3,9 @@
 library(ggplot2)
 library(hrbrthemes)
 library(splines) 
-
-data <- read.table("site.txt",head=T)
+data <- read.table("site2.txt",head=T)
 color <- c("grey30", "grey50", "#00CC66","#339933")
-ggplot(data = data,aes(x = name, y = num,group=group)) +
+ggplot(data = data,aes(x = name/1000000, y = num,group=group)) +
   geom_point(aes(fill = group,size=5),shape = 21,alpha=.8,size=5)+
              #color = "transparent")+
   #在外面家里白色圆框
@@ -41,7 +40,9 @@ ggplot(data = data,aes(x = name, y = num,group=group)) +
      panel.grid.major = element_blank(),       
       panel.grid.minor = element_blank(),
       axis.line = element_line(colour = "black")) +
-geom_smooth(aes(col=group),method = 'lm',size = 1, se=FALSE,colour = "grey50",linetype=2,alpha=.7)
+#geom_smooth(aes(col=group),method = 'lm',size = 1, se=FALSE,colour = "black",linetype=2,alpha=.4)+
+ geom_smooth(method="loess",se=F,size=.5,linetype=2,aes(group=group),col="grey60")+
+ scale_x_continuous(limits = c(0,50))
 
 ggsave("bam_frac.pdf",width=5.5,height=4)
 
