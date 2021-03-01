@@ -1,0 +1,40 @@
+python ~/bin_python/I_script/trans_neg2pos.py 1.rough.txt 1neg.rough.txt > 1.sites.txt
+python ~/bin_python/I_script/trans_neg2pos.py 2.rough.txt 2neg.rough.txt > 2.sites.txt
+python ~/bin_python/I_script/trans_neg2pos.py 3.rough.txt 3neg.rough.txt > 3.sites.txt
+python ~/bin_python/I_script/trans_neg2pos.py 4.rough.txt 4neg.rough.txt > 4.sites.txt
+
+python ~/bin_python/I_script/stat_pos_site.py 1.sites.txt > 1.final.txt
+python ~/bin_python/I_script/stat_pos_site.py 2.sites.txt > 2.final.txt
+python ~/bin_python/I_script/stat_pos_site.py 3.sites.txt > 3.final.txt
+python ~/bin_python/I_script/stat_pos_site.py 4.sites.txt > 4.final.txt
+
+python get_seq_2bp.py 1.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 1.final.txt.fa
+python get_seq_2bp.py 2.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 2.final.txt.fa
+python get_seq_2bp.py 3.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 3.final.txt.fa
+python get_seq_2bp.py 4.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 4.final.txt.fa
+
+python seq2matrix.py 1.final.txt.fa > 1.txt
+python seq2matrix.py 2.final.txt.fa > 2.txt
+python seq2matrix.py 3.final.txt.fa > 3.txt
+python seq2matrix.py 4.final.txt.fa > 4.txt
+
+######################### motifStack #####################################
+
+
+suppressPackageStartupMessages(library(motifStack))
+
+a1 <- read.table("3.txt", sep=" ",head=F)  #读取矩阵
+a2 <- read.table("4.txt", sep=" ",head=F)  #读取矩阵
+
+a1 = t(as.matrix(a1))
+a2 = t(as.matrix(a2))
+rownames(a1) <- c("A","U","C","G","I") 
+rownames(a2) <- c("A","U","C","G","I") 
+motif <- new("pcm", mat=pcm2pfm(a1), name="rep1",color=colorset(alphabet="RNA",colorScheme="auto"))
+pdf('3.svg',w=6, h= 4)
+plot(motif,font="Arial")
+dev.off()
+pdf('4.pdf', w=6, h= 4)
+motif <- new("pcm", mat=pcm2pfm(a2), name="rep2",color=colorset(alphabet="RNA",colorScheme="auto"))
+plot(motif,font="Arial")
+dev.off()
