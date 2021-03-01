@@ -23,4 +23,4 @@ d = get_matrix(sys.argv[1])
 #print("A U C G I")
 for k,v in d.items():
 	#print('A'+' '+str(Counter(v)['A'])+' '+'U'+' '+str(Counter(v)['T'])+' '+'C'+' '+str(Counter(v)['C'])+' '+'G'+' '+str(Counter(v)['G'])+' '+'I'+' '+str(Counter(v)['I']))
-	print(str(Counter(v)['A'])+' '+str(Counter(v)['U'])+' '+str(Counter(v)['C'])+' '+str(Counter(v)['G'])+' '+str(Counter(v)['I']))
+	print(str(Counter(v)['A'])+' '+str(Counter(v)['T'])+' '+str(Counter(v)['C'])+' '+str(Counter(v)['G'])+' '+str(Counter(v)['I']))
