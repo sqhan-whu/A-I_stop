@@ -8,15 +8,20 @@ python ~/bin_python/I_script/stat_pos_site.py 2.sites.txt > 2.final.txt
 python ~/bin_python/I_script/stat_pos_site.py 3.sites.txt > 3.final.txt
 python ~/bin_python/I_script/stat_pos_site.py 4.sites.txt > 4.final.txt
 
-python get_seq_2bp.py 1.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 1.final.txt.fa
-python get_seq_2bp.py 2.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 2.final.txt.fa
-python get_seq_2bp.py 3.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 3.final.txt.fa
-python get_seq_2bp.py 4.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 4.final.txt.fa
+cat 3.final.txt 4.final.txt |cut -f 1,2,6|sort |uniq |awk '{print $1,$2,". . .",$3}'|tr -s ' '|tr ' ' '\t'  > mouse.36546.sites
+python get_seq_2bp.py mouse.36546.sites /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > mouse.36546.sites.fa
+python seq2matrix.py mouse.36546.sites.fa > mouse.36546.sites.txt
 
-python seq2matrix.py 1.final.txt.fa > 1.txt
-python seq2matrix.py 2.final.txt.fa > 2.txt
-python seq2matrix.py 3.final.txt.fa > 3.txt
-python seq2matrix.py 4.final.txt.fa > 4.txt
+
+#python get_seq_2bp.py 1.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 1.final.txt.fa
+#python get_seq_2bp.py 2.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 2.final.txt.fa
+#python get_seq_2bp.py 3.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 3.final.txt.fa
+#python get_seq_2bp.py 4.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 4.final.txt.fa
+
+#python seq2matrix.py 1.final.txt.fa > 1.txt
+#python seq2matrix.py 2.final.txt.fa > 2.txt
+#python seq2matrix.py 3.final.txt.fa > 3.txt
+#python seq2matrix.py 4.final.txt.fa > 4.txt
 
 ######################### motifStack #####################################
 
