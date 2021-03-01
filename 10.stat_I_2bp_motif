@@ -8,21 +8,31 @@ python ~/bin_python/I_script/stat_pos_site.py 2.sites.txt > 2.final.txt
 python ~/bin_python/I_script/stat_pos_site.py 3.sites.txt > 3.final.txt
 python ~/bin_python/I_script/stat_pos_site.py 4.sites.txt > 4.final.txt
 
+###  mouse  #####
 cat 3.final.txt 4.final.txt |cut -f 1,2,6|sort |uniq |awk '{print $1,$2,". . .",$3}'|tr -s ' '|tr ' ' '\t'  > mouse.36546.sites
 python get_seq_2bp.py mouse.36546.sites /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > mouse.36546.sites.fa
 python seq2matrix.py mouse.36546.sites.fa > mouse.36546.sites.txt
 
+#### human 293T cell / Hela cell
+python ~/bin_python/I_script/trans_neg2pos.py H293-1.sorted.bam.filter.bam.pos.sort.bam.pos.rough.txt H293-1.sorted.bam.filter.bam.neg.sort.bam.neg.rough.txt > H293-1.site.txt
+python ~/bin_python/I_script/trans_neg2pos.py H293-2.sorted.bam.filter.bam.pos.sort.bam.pos.rough.txt H293-2.sorted.bam.filter.bam.neg.sort.bam.neg.rough.txt > H293-2.site.txt
 
-#python get_seq_2bp.py 1.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 1.final.txt.fa
-#python get_seq_2bp.py 2.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 2.final.txt.fa
-#python get_seq_2bp.py 3.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 3.final.txt.fa
-#python get_seq_2bp.py 4.final.txt /home/weiqi/project/01.weiqi/20200929_inosine/process/index/GRCm38.p6.fa > 4.final.txt.fa
+python ~/bin_python/I_script/trans_neg2pos.py Hela-1.sorted.bam.filter.bam.pos.sort.bam.pos.rough.txt Hela-1.sorted.bam.filter.bam.neg.sort.bam.neg.rough.txt > Hela-1.site.txt
+python ~/bin_python/I_script/trans_neg2pos.py Hela-2.sorted.bam.filter.bam.pos.sort.bam.pos.rough.txt Hela-2.sorted.bam.filter.bam.neg.sort.bam.neg.rough.txt > Hela-2.site.txt
 
-#python seq2matrix.py 1.final.txt.fa > 1.txt
-#python seq2matrix.py 2.final.txt.fa > 2.txt
-#python seq2matrix.py 3.final.txt.fa > 3.txt
-#python seq2matrix.py 4.final.txt.fa > 4.txt
+python ~/bin_python/I_script/stat_pos_site.py H293-1.site.txt > H293-1.final.site.txt
+python ~/bin_python/I_script/stat_pos_site.py H293-2.site.txt > H293-2.final.site.txt
 
+python ~/bin_python/I_script/stat_pos_site.py Hela-1.site.txt  > Hela-1.final.site.txt
+python ~/bin_python/I_script/stat_pos_site.py Hela-2.site.txt  > Hela-2.final.site.txt
+
+cat H293-1.final.site.txt H293-2.final.site.txt |cut -f 1,2,6|sort |uniq |awk '{print $1,$2,". . .",$3}'|tr -s ' '|tr ' ' '\t'  > human.293.sites.txt
+cat Hela-1.final.site.txt Hela-2.final.site.txt |cut -f 1,2,6|sort |uniq |awk '{print $1,$2,". . .",$3}'|tr -s ' '|tr ' ' '\t'  > human.Hela.sites.txt
+
+python ~/scratch/20201122_A_I/HISAT2/process/I_2bp/get_seq_2bp.py human.293.sites.txt /home/weiqi/project/00.DATABASE/hg38/hg38.fa > human.293.sites.fa
+python ~/scratch/20201122_A_I/HISAT2/process/I_2bp/get_seq_2bp.py human.Hela.sites.txt /home/weiqi/project/00.DATABASE/hg38/hg38.fa > human.Hela.sites.fa
+python ~/scratch/20201122_A_I/HISAT2/process/I_2bp/seq2matrix.py  human.293.sites.fa > human.293.sites.fa.txt
+python ~/scratch/20201122_A_I/HISAT2/process/I_2bp/seq2matrix.py  human.Hela.sites.fa > human.Hela.sites.fa.txt
 ######################### motifStack #####################################
 
 suppressPackageStartupMessages(library(motifStack))
