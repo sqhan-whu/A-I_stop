@@ -1,8 +1,6 @@
 ####usage: python script sample_sites.txt 
-
 import sys, os
 import collections
-
 def get_annvar_input(sites_file):
 	c = collections.defaultdict(list)
 	with open(sites_file) as f, \
@@ -35,7 +33,7 @@ def get_raw_information(sites_file):
 
 	command3 = 'cut -f 1-2 '+input_file+' > tmp'+sites_file
 #	command4 = 'cat '+sites_file+' |grep -w -f tmp'+sites_file+' > final_'+sites_file
-	command4 ='awk \'NR==FNR{s[$1"\t"$2]=$0;next}NR>FNR{print s[$1"\t"$2]}\' '+sites_file+' tmp'+sites_file+' >final_'+sites_file
+	command4 ='awk \'NR==FNR{s[$1"\t"$2]=$0;next}NR>FNR{print s[$1"\t"$2]}\' '+sites_file+' tmp'+sites_file+' |sort -k1,1 -k2,2n >final_'+sites_file
 	command5 = 'rm tmp'+sites_file
 	os.system(command3)
 	os.system(command4)
